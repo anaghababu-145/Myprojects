@@ -1,5 +1,7 @@
 package customerpackage;
 
+import java.util.ArrayList;
+
 public class Customer {
 	//registration
 	private String firstName;
@@ -64,17 +66,18 @@ public class Customer {
 		this.proofId = proofId;
 	}
 	
-	
-	public void updateEmail(int custid, String nemail, String[] emailid, int emid) 
-	{
 		// TODO Auto-generated method stub
-		for(int i=0;i<emid;i++)
+		
+	
+	public void updateEmail(int custid, String nemail, ArrayList<String> ed) {
+		// TODO Auto-generated method stub
+		for(int i=0;i<ed.size();i++)
 		{
 			if(i==custid-1)
 			{
-				System.out.println("old emailid :"+""+emailid[i]);
-				emailid[i]=nemail;
-				System.out.println("updated email id is:"+""+emailid[i]);
+				System.out.println("old emailid :"+""+ed.get(i));
+				ed.add(i,nemail);
+				System.out.println("updated email id is:"+""+ed.get(i));
 			}
 		}
 	}

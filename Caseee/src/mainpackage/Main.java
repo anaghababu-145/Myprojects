@@ -3,6 +3,7 @@ package mainpackage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import bookingpackage.Booking;
@@ -17,7 +18,7 @@ public class Main {
 
 	public static void main(String[] args) throws IOException 
 	{
-		int pos=0;
+		//int pos=0;
 		Scanner sc=new Scanner(System.in);
 		
 		 String firstName;
@@ -32,9 +33,16 @@ public class Main {
 		 String n[]=new String[30];
 		 String emailid[]=new String[30];
 			int v=0;
-			int emid = 0;
+			//int emid = 0;
 			String em;
 			Customer customer=new Customer();
+			
+			ArrayList<String> name=new ArrayList<String>();
+			ArrayList<String> ed=new ArrayList<String>();
+			ArrayList<Integer> rg=new ArrayList<Integer>();
+			ArrayList<Integer> rd=new ArrayList<Integer>();
+			ArrayList<Integer> dt=new ArrayList<Integer>();
+			
 		 BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
 		 do {
 		 System.out.println("\t   Menu");
@@ -53,15 +61,17 @@ public class Main {
 			 System.out.println("Please enter your details");
 			 System.out.println("Enter your name : ");
 		     firstName=br.readLine();
-		     n[v]=firstName;
-		     v++;
+		     name.add(firstName);
+		     //n[v]=firstName;
+		    // v++;
 		     System.out.println("Enter your middle name :");
 		     middleName=br.readLine();
 		     System.out.println("Enter your last name :");
 		     lastName=br.readLine();
 		     System.out.println("Enter your email:");
 		     email=br.readLine();
-		     emailid[emid]=email;
+		     ed.add(email);
+		     //emailid[emid]=email;
 		     System.out.println("Enter your phone number:");
 		     phone=br.readLine();
 		     System.out.println("Enter your address:");
@@ -74,8 +84,9 @@ public class Main {
 		     Registration reg=new Registration();
 		     reg.register(firstName,middleName,lastName,email,phone,address,proofType,proofId);
 		     System.out.println("Thanks for registering.Your ID is : "+ ++registerID);
-		     RegID[emid]=registerID;
-		     emid++;
+		     rg.add(registerID);
+		     //RegID[emid]=registerID;
+		     //emid++;
 		     System.out.println("Do you want to go back to Registration(y/n)?");
 			 ch1=br.readLine();
 			 }while(ch1.equalsIgnoreCase("y"));
@@ -89,7 +100,8 @@ public class Main {
 			 if(ch2.equalsIgnoreCase("y"))
 			 {
 				 System.out.println("Thank you for the booking.Your RoomID is :"+ ++roomid);
-				 bk[pos++]=roomid;		 
+				 rd.add(roomid);
+				 //bk[pos++]=roomid;		 
 			 }
 			 else
 				 System.out.println("Visit Again");
@@ -97,7 +109,7 @@ public class Main {
 		 case 3:
 			 System.out.println("Enter the room no you want to check?");
 			 int roomChk=sc.nextInt();
-			 book.status(bk,pos,roomChk);//
+			 book.status(rd,roomChk);//
 			 break;
 		 case 4:
 			 //email updation;
@@ -110,18 +122,18 @@ public class Main {
 					
 					System.out.println("Enter new email id");
 					String nemail=br.readLine();
-				 customer.updateEmail(custid,nemail,emailid,emid);
+				 customer.updateEmail(custid,nemail,ed);
 				 System.out.println("Email updated");
 					
 				}
 			 break;
 		 case 5:
 			 //all bookings
-			 book.ViewBookings(bk,RegID);
+			 book.ViewBookings(rd,rg);
 			 break;
 		 case 6:
 			// all customers
-			 book.displaycustomers(RegID,n,v);
+			 book.displaycustomers(rg,name);
 			 break;
 		 case 7:
 			 //quit

@@ -1,6 +1,6 @@
 package bookingpackage;
 import java.io.IOException;
-
+import java.util.ArrayList;
 import java.util.Scanner;
 import customerpackage.Customer;
 public class Booking {
@@ -18,9 +18,10 @@ public class Booking {
 	static int i=0;
 	// int roomid=0;
 	//int bk[]=new int[25];
-	int dt[]=new int[30];
+	//int dt[]=new int[30];
 	int dtpos=0;
 	Scanner sc=new Scanner(System.in);
+	ArrayList<Integer> dt=new ArrayList<Integer>();
 	
 	public void booking()
 	{
@@ -38,8 +39,9 @@ public class Booking {
 		laundry=sc.nextLine();
 		System.out.println("Date");
 		date=sc.nextInt();
-		dt[dtpos]=date;
-		dtpos++;
+		dt.add(date);
+		//dt[dtpos]=date;
+		//dtpos++;
 	}
 	public void booked()
 	{
@@ -85,7 +87,7 @@ public class Booking {
 		
 	}
 	
-public void ViewBookings(int[] bk,int[] RegID) throws IOException
+public void ViewBookings(ArrayList<Integer> rd,ArrayList<Integer> rg) throws IOException
 {
 	System.out.println("view all bookings:");
 	System.out.println("Enter the start date");
@@ -94,23 +96,32 @@ public void ViewBookings(int[] bk,int[] RegID) throws IOException
 	enddate=sc.nextInt();
 	System.out.println("The bookings made from "+ startdate +" to "+ enddate+" are");
 	System.out.println("Room No            Customer ID");
-	for(int i=0;i<dtpos;i++)
+	for(int i=0;i<dt.size();i++)
 	{
-	if(startdate<=dt[i] && dt[i]<=enddate)
+	if(startdate<=dt.get(i) && dt.get(i)<=enddate)
 	{
 		
-	System.out.println(bk[i]+"             "+RegID[i]);
+	System.out.println(rd.get(i)+"             "+rg.get(i));
 	}
 	}
 }
 
-public void status(int[] bk,int pos,int roomChk) 
+public void displaycustomers(ArrayList<Integer> rg, ArrayList<String> name) {
+	// TODO Auto-generated method stub
+	System.out.println("The registered customers are:");
+	System.out.println("Customer ID             Customer Name");
+	for(int k=0;k<name.size();k++)
+	{
+		System.out.println(rg.get(k)+"              "+name.get(k));
+	}
+}
+public void status(ArrayList<Integer> rd, int roomChk) 
 {
-	
+	// TODO Auto-generated method stub
 	int flag=0;
 	for( int j=0;j<25;j++)
 	{
-		if(roomChk==bk[j])
+		if(roomChk==rd.get(j))
 		{
 			System.out.println("Room number "+roomChk+" is booked");
 			flag=1;
@@ -119,15 +130,7 @@ public void status(int[] bk,int pos,int roomChk)
 	}
 	if(flag==0)
 		System.out.println("Room number "+roomChk+" is not booked");
-}
-public void displaycustomers(int[] RegID, String[] n, int v) {
-	// TODO Auto-generated method stub
-	System.out.println("The registered customers are:");
-	System.out.println("Customer ID             Customer Name");
-	for(int k=0;k<v;k++)
-	{
-		System.out.println(RegID[k]+"              "+n[k]);
-	}
+	
 }
 
 }
